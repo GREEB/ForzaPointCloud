@@ -1,0 +1,42 @@
+{
+  "name": "ForzaPointCloud",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@cyrilf/vue-dat-gui": "^0.3.0",
+    "@nuxtjs/auth-next": "^5.0.0-1637745161.ea53f98",
+    "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/svg": "^0.3.0",
+    "body-parser": "^1.19.0",
+    "core-js": "^3.15.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "fs": "^0.0.1-security",
+    "lodash.throttle": "^4.1.1",
+    "mongoose": "^6.0.15",
+    "net": "^1.0.2",
+    "nuxt": "^2.15.7",
+    "on-change": "^4.0.0",
+    "socket.io": "^4.4.0",
+    "socket.io-client": "^4.4.0",
+    "three": "^0.135.0",
+    "vuetify": "^2.5.5"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.14.7",
+    "@nuxtjs/eslint-config": "^6.0.1",
+    "@nuxtjs/eslint-module": "^3.0.2",
+    "@nuxtjs/vuetify": "^1.12.1",
+    "eslint": "^7.29.0",
+    "eslint-plugin-nuxt": "^2.0.0",
+    "eslint-plugin-vue": "^7.12.1",
+    "sass": "^1.44.0",
+    "sass-loader": "10.1.1"
+  }
+}
