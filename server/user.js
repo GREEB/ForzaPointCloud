@@ -23,8 +23,10 @@ export const lastSeen = (obj) => {
 }
 export const registerUser = async (userID) => {
   // On first login register user
+
   // TODO: Probably need to recheck discord auth here for security and pass id from there
   // category=Server,Auth
+
   const findUser = await User.find({ mid: userID }).exec()
   let createUser
   if (!(userID in users)) { users[userID] = {} }
