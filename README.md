@@ -1,6 +1,6 @@
 # Forza Point Cloud
 [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
-[![Build Status](https://app.travis-ci.com/GREEB/ForzaPointCloud.svg?branch=main)](https://app.travis-ci.com/GREEB/ForzaPointCloud)
+[![Build Status](https://app.travis-ci.com/GREEB/ForzaPointCloud.svg?branch=master)](https://app.travis-ci.com/GREEB/ForzaPointCloud)
 [![issues](https://github.com/GREEB/ForzaPointCloud/workflows/todo2issue/badge.svg)](https://github.com/GREEB/ForzaPointCloud/actions?query=workflow:"todo2issue")
 
 This websites enables collaborative 3D mapping of Forza maps, has some extra features to attract users.
