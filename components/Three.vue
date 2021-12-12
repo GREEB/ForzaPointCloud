@@ -51,9 +51,8 @@ export default {
     }
   },
   mounted () {
-    /**
-     * TODO: Move Socket logic and handle reconnection if unsuccessfully connection
-     */
+    // TODO: Move Socket logic and handle reconnection if unsuccessfully connection
+    // category=Three
     if (this.$auth.loggedIn) {
       const cookie = JSON.stringify({ ...this.$auth.$storage.getCookies(), ...this.$auth.user })
       const socket = io('http://localhost:8080', { extraHeaders: { dc: cookie } })

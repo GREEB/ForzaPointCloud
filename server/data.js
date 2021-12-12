@@ -51,6 +51,7 @@ const fakeData = () => {
 }
 
 // FIXME: Fix all of this user session logic, use something real like express-sessions
+// category=Server
 // const addUDPuser = async (ip) => {
 //   console.log(`adding user with ip: ${ip}`)
 //   createUser(ip)
