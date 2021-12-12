@@ -25,7 +25,7 @@ export const registerUser = async (userID) => {
   // On first login register user
 
   // TODO: Probably need to recheck discord auth here for security and pass id from there
-  // category=Server,Auth
+  // category=Server
 
   const findUser = await User.find({ mid: userID }).exec()
   let createUser
