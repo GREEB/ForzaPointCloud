@@ -94,7 +94,9 @@ export default {
     this.geometry.setAttribute('position', new Float32BufferAttribute(positions, 3))
     this.geometry.setAttribute('color', new Float32BufferAttribute(this.colors.default, 3))
 
-    this.material = new PointsMaterial({ // TODO: Change shape can be done with a texture but not cool maybe shader? not sure what any paras do
+    // TODO: Change shape can be done with a texture but not cool maybe shader? not sure what any paras do
+    // category=Three
+    this.material = new PointsMaterial({
       size: 20,
       vertexColors: true
       // blending: AdditiveBlending,
@@ -109,6 +111,7 @@ export default {
     this.points = new Points(this.geometry, this.material)
     this.scene.add(this.points)
     // FIXME: Fix BoxHelper updates fine but wrong position
+    // category=Three
     this.box = new BoxHelper(this.points, 0xFFFFFF)
     this.box.visible = true
     // this.scene.add(this.box)
@@ -179,7 +182,9 @@ export default {
     this.animate()
   },
   methods: {
-    addPoint2Store () { // TODO: update client data only every x seconds or something else completely
+    // TODO: update client data only every x seconds or something else completely
+    // category=Three
+    addPoint2Store () {
       // this.$store.commit('points/increment')
     },
     addPoint (xyz, heightRGB, terrainRGB) {

@@ -70,7 +70,8 @@ udpServer.on('message', (msg, rinfo) => {
     surface = 0
   }
 
-  // TODO:Nuxt.Server: Throttle write for each client
+  // TODO: Throttle write for each client
+  // category=Server
   throttledWrite(x, y, z, surface, flying, rinfo.address, rinfo.size, userID)
 })
 

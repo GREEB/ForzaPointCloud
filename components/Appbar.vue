@@ -54,6 +54,7 @@
             v-on="on"
           >
             <!-- TODO: ADD color if no image or fix bg and image offset -->
+            <!-- category=frontend -->
             <v-avatar
               size="30"
             >
@@ -61,7 +62,9 @@
                 :src="avatar"
                 alt="John"
               >
-              <!-- TODO: if user has no image create something with text -->
+              <!-- TODO: If user has no image create something with text -->
+              <!-- category=frontend -->
+
               <!-- <span class="white--text text-h5">dfgdg</span> -->
             </v-avatar>
           </v-btn>
