@@ -20,8 +20,6 @@ export const io = new Server(httpServer, {
 })
 
 io.sockets.on('connection', (socket) => {
-  console.log(JSON.parse(socket.handshake.headers.dc))
-  // FIXME: Something better
   let clientIp = '0.0.0.0'
   if ('x-real-ip' in socket.handshake.headers) {
     clientIp = socket.handshake.headers['x-real-ip']
@@ -30,8 +28,6 @@ io.sockets.on('connection', (socket) => {
   }
   const userID = Math.round(clientIp.split('.').reduce((a, b) => a + b, 0) * Math.PI)
   addIOuser(socket, clientIp, userID)
-  // TODO: Create user in DB, pass user when adding pos FIXME: get a better formula for IP2ID
-  // TODO: Pass to data.js and match with udpServer
   // const userID = Math.round(clientIp.split('.').reduce((a, b) => a + b, 0) * Math.PI)
   // socket.emit('chordPack',)
 })

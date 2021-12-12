@@ -28,11 +28,11 @@ export default {
         clientSecret: process.env.DISCORDSECRET,
         grantType: 'authorization_code',
         codeChallengeMethod: '',
-        scope: ['identify'] // FIXME: nuxt.AUTH.Discord: Somehow still wants email, we dont need email
+        scope: ['identify'] // FIXME: Nuxt.AUTH.Discord: Somehow still wants email, we dont need email
       }
     },
     redirect: {
-      login: '/login', // TODO: nuxt.AUTH.Discord: Send to server middleware to register user
+      login: '/login', // TODO: Nuxt.AUTH.Discord: Send to server middleware to register user
       logout: '/auth',
       home: '/'
     }

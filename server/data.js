@@ -50,11 +50,11 @@ const fakeData = () => {
   createFakeData()
 }
 
-// FIXME: Fix all of this user session logic, use something real like express-sessions
-const addUDPuser = async (ip) => { // FIXME: TYPO
-  console.log(`adding user with ip: ${ip}`)
-  createUser(ip)
-}
+// FIXME:Nuxt.Server: Fix all of this user session logic, use something real like express-sessions
+// const addUDPuser = async (ip) => {
+//   console.log(`adding user with ip: ${ip}`)
+//   createUser(ip)
+// }
 
 const throttledWrite = throttle((x, y, z, surface, flying, ip, size, userID) => {
   // import users
@@ -82,7 +82,7 @@ const throttledWrite = throttle((x, y, z, surface, flying, ip, size, userID) => 
     user: users[userID].mongodb_id
   })
   newPos.save((err) => {
-    if (err) { console.log('DUPLICATE FIXME') } // TODO: Check duplicates in cache?
+    if (err) { console.log('DUPLICATE FIXME') } // TODO:Nuxt.Server: Check duplicates in cache?
   })
   io.to(users[userID].socketID).emit('chord', {
     x, y, z, s: surface
