@@ -2,7 +2,6 @@ import http from 'http'
 import dotenv from 'dotenv'
 import express from 'express'
 import { Server } from 'socket.io'
-import { path, dirname } from './defaults.js'
 import { addIOuser } from './user.js'
 import { fakeData } from './data.js'
 dotenv.config()
@@ -20,14 +19,15 @@ export const io = new Server(httpServer, {
 })
 
 io.sockets.on('connection', (socket) => {
-  let clientIp = '0.0.0.0'
-  if ('x-real-ip' in socket.handshake.headers) {
-    clientIp = socket.handshake.headers['x-real-ip']
-  } else {
-    clientIp = socket.handshake.address.split(':').pop().toString()
-  }
-  const userID = Math.round(clientIp.split('.').reduce((a, b) => a + b, 0) * Math.PI)
-  addIOuser(socket, clientIp, userID)
+  // let clientIp = '0.0.0.0'
+  // console.log(JSON.parse(socket.handshake.headers.dc))
+  // if ('x-real-ip' in socket.handshake.headers) {
+  //   clientIp = socket.handshake.headers['x-real-ip']
+  // } else {
+  //   clientIp = socket.handshake.address.split(':').pop().toString()
+  // }
+  // const userID = Math.round(clientIp.split('.').reduce((a, b) => a + b, 0) * Math.PI)
+  addIOuser(socket)
   // const userID = Math.round(clientIp.split('.').reduce((a, b) => a + b, 0) * Math.PI)
   // socket.emit('chordPack',)
 })

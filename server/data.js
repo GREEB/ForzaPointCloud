@@ -89,4 +89,4 @@ const throttledWrite = throttle((x, y, z, surface, flying, ip, size, userID) => 
   })
 }, 0)
 
-export { throttledWrite, addUDPuser, fakeData }
+export { throttledWrite, fakeData }
