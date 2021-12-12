@@ -5,10 +5,6 @@
 
 This websites enables collaborative 3D mapping of Forza maps, has some extra features to attract users.
 
-
-## [securityb.us](securityb.us)
-
-Follow the steps on the website to help complete the map, the data is gonne be saved even if you dont have the website open.
 ## Features
 
 - [x]  Three: dynamic point cloud
