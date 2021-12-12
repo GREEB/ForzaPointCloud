@@ -15,4 +15,3 @@ install:
 
 script:
   - yarn build
-  - yarn generate
