@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import express from 'express'
 import { Server } from 'socket.io'
 import { addIOuser } from './user.js'
-import { fakeData } from './data.js'
+import { fakeData } from './fakeData.js'
 dotenv.config()
 
 const app = express()
@@ -32,10 +32,11 @@ io.sockets.on('connection', (socket) => {
   // socket.emit('chordPack',)
 })
 
-fakeData()
 // Access the session as req.session
 
 app.all('/getJSON', (req, res) => {
   res.json({ data: 'data' })
 })
+fakeData()
+
 export default app
