@@ -23,7 +23,7 @@ import { WebGLRenderer, PointsMaterial, Object3D, Vector3, PerspectiveCamera, Sc
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js'
-// import { io } from 'socket.io-client'
+import { io } from 'socket.io-client'
 
 export default {
   data () {
@@ -73,33 +73,33 @@ export default {
 
     //   console.log({ ...this.$auth.$storage.getCookies(), ...this.$auth.user })
     // }
-    // let cookie = { auth: false }
-    // if (this.$auth.loggedIn) {
-    //   cookie = { ...this.$auth.$storage.getCookies(), ...this.$auth.user }
-    // }
-    // const socket = io(this.$config.url + ':' + this.$config.socketPort, { auth: { cookie } })
+    let cookie = { auth: false }
+    if (this.$auth.loggedIn) {
+      cookie = { ...this.$auth.$storage.getCookies(), ...this.$auth.user }
+    }
+    const socket = io(this.$config.url + ':' + this.$config.socketPort, { auth: { cookie } })
 
-    // socket.on('connect', () => {
-    //   this.io.text = 'Sockets Connected: ' + socket.id
-    //   this.io.show = true
-    //   this.io.connected = true
-    // })
-    // socket.on('disconnect', () => {
-    //   this.io.text = 'look he disconnected: ' + socket.id
-    //   this.io.connected = false
-    //   this.io.show = true
-    // })
-    // socket
-    //   .on('chord', (msg, cb) => {
-    //     this.parsePoint(msg)
-    //   })
-    // socket
-    //   .on('chordPack', (msg, cb) => {
-    //     for (let index = 0; index < msg.length; index++) {
-    //       const element = msg[index]
-    //       this.parsePoint(element)
-    //     }
-    //   })
+    socket.on('connect', () => {
+      this.io.text = 'Sockets Connected: ' + socket.id
+      this.io.show = true
+      this.io.connected = true
+    })
+    socket.on('disconnect', () => {
+      this.io.text = 'look he disconnected: ' + socket.id
+      this.io.connected = false
+      this.io.show = true
+    })
+    socket
+      .on('chord', (msg, cb) => {
+        this.parsePoint(msg)
+      })
+    socket
+      .on('chordPack', (msg, cb) => {
+        for (let index = 0; index < msg.length; index++) {
+          const element = msg[index]
+          this.parsePoint(element)
+        }
+      })
 
     Object3D.DefaultUp = new Vector3(0, 0, 1)
 

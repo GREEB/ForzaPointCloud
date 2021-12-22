@@ -1,6 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s ForzaPointCloud',
@@ -18,24 +19,44 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  router: {
-    middleware: ['auth']
+  axios: {
+    baseURL: 'http://192.168.0.42:3000'
   },
   auth: {
     strategies: {
-      discord: {
-        clientId: process.env.DISCORDID,
-        clientSecret: process.env.DISCORDSECRET,
-        grantType: 'authorization_code',
-        codeChallengeMethod: '',
-        scope: ['identify']
+      local: {
+        scheme: 'refresh',
+        token: {
+          property: 'token',
+          global: true,
+          required: true,
+          type: 'Bearer'
+        },
+        user: {
+          property: 'user',
+          autoFetch: true
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          data: 'refresh_token'
+        },
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post' },
+          refresh: { url: '/api/auth/refresh-token', method: 'post' },
+          logout: false, //  we don't have an endpoint for our logout in our API and we just remove the token from localstorage
+          user: { url: '/api/auth/user', method: 'get' }
+        }
       }
-    },
-    redirect: {
-      login: '/login',
-      logout: '/auth',
-      home: '/'
     }
+  },
+  server: {
+    host: '0.0.0.0',
+    port: process.env.PORT || 3000
+  },
+  publicRuntimeConfig: {
+    socketPort: process.env.IOPORT || 3001,
+    url: process.env.URL || 'http://localhost' + this.port
+
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -61,12 +82,30 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    'nuxt-socket-io'
   ],
+  io: {
+    sockets: [
+      {
+        name: 'main',
+        url: 'http://192.168.0.42:3001',
+        default: true,
+        vuex: {
+          actions: [
+            'connect --> CONNECT',
+            'disconnect --> DISCONNECT',
+            'registerUdp --> UDPREGISTER'
+          ],
+          emitBacks: [
+            'sockets/game'
+          ]
+        }
+      }
+    ]
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
-
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
@@ -86,12 +125,12 @@ export default {
     }
   },
   loading: {
-    color: 'blue',
-    height: '5px'
+    color: 'black',
+    height: '3px'
   },
   serverMiddleware: [
     // { path: '/auth', handler: '~/middleware/auth' },
-    { path: '/', handler: '~/server/index.js' }
+    { path: '/', handler: '~/server/server.js' }
     // { path: '/udp', handler: '~/middleware/udp' },
     // { path: '/io', handler: '~/middleware/io' }
 

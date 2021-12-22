@@ -30,7 +30,7 @@
 
         color="#5865F2"
         class="ma-2 white--text"
-        @click="$auth.loginWith('discord')"
+        :href="oauth"
       >
         Login
         <v-icon
@@ -73,9 +73,6 @@
           <v-list-item-content class="justify-center">
             <div class="mx-auto text-center">
               <h3>{{ $auth.user.username }}</h3>
-              <p class="text-caption mt-1">
-                {{ $auth.user.discriminator }}
-              </p>
               <v-divider class="my-3" />
               <v-btn
                 depressed
@@ -89,7 +86,7 @@
                 depressed
                 rounded
                 text
-                @click="$auth.logout('discord')"
+                @click="logout"
               >
                 Disconnect
               </v-btn>
@@ -105,14 +102,21 @@ export default {
   data: () => ({
     title: 'PointCloud',
     gg: null,
-    active: false
+    active: false,
+    oauth: 'https://discord.com/api/oauth2/authorize?client_id=918603750057328640&redirect_uri=http%3A%2F%2F192.168.0.42%3A3000%2Fcallback&response_type=code&scope=identify%20email'
   }),
   computed: {
+    isAuthenticated () {
+      return this.$store.getters.isAuthenticated
+    },
+    getUserInfo () {
+      return this.$store.getters.getUserInfo
+    },
     pointCounts () {
       return this.$store.state.points.count
     },
     avatar () {
-      return `https://cdn.discordapp.com/avatars/${this.$auth.user.id}/${this.$auth.user.avatar}.png`
+      return `https://cdn.discordapp.com/avatars/${this.$auth.user.did}/${this.$auth.user.avatar}.png`
     }
   },
   watch: {
@@ -120,6 +124,11 @@ export default {
       this.gg = count
       // Our fancy notification (2).
       // console.log(`We have ${count} fruits now, yay!`)
+    }
+  },
+  methods: {
+    async logout () {
+      await this.$auth.logout()
     }
   }
 

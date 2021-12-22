@@ -1,7 +1,6 @@
 import dgram from 'dgram'
-import { throttledWrite } from './data.js'
-import { makeUDPuser } from './user.js'
-
+import * as fs from 'fs'
+import { makeUDPuser } from '../controllers/userController'
 const udpServer = dgram.createSocket('udp4')
 
 // const addK2R = async (ip) =>{
@@ -16,12 +15,18 @@ const udpServer = dgram.createSocket('udp4')
 // }
 
 udpServer.on('message', (msg, rinfo) => {
-  const ip = rinfo.address
-  let userID
   if (rinfo !== undefined) {
-    userID = Math.round(ip.split('.').reduce((a, b) => a + b, 0) * Math.PI)
-    makeUDPuser(rinfo.address, userID)
+    makeUDPuser(rinfo.address)
   }
+
+  // write some data with a base64 encoding
+  // fs.appendFile('./stream.txt', msg.toString('hex') + '\n', (err) => {
+  //   if (err) { throw err }
+  // })
+
+  // the finish event is emitted when all data has been flushed from the stream
+
+  // close the stream
   // important to tag data by user so if we have a bad actor its ez to remove
   // addK2R(rinfo.address)
   // console.log(udpclients);
@@ -72,7 +77,7 @@ udpServer.on('message', (msg, rinfo) => {
 
   // TODO: Throttle write for each client
   // category=Server
-  throttledWrite(x, y, z, surface, flying, rinfo.address, rinfo.size, userID)
+  // throttledWrite(x, y, z, surface, flying, rinfo.address, rinfo.size, userID)
 })
 
 udpServer.on('error', (err) => {
@@ -83,10 +88,5 @@ udpServer.on('error', (err) => {
 udpServer.on('close', (err) => {
   console.log(`udpServer error:\n${err}`)
 })
-udpServer.on('listening', () => {
-  const address = udpServer.address()
-  console.log(`udpServer listening ${address.address}:${address.port}`)
-})
-udpServer.bind(5300)
 
-export default { udpServer }
+export default udpServer

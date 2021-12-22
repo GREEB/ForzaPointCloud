@@ -1,6 +1,6 @@
 // Send fake data
 // Create fake data
-import { io } from './index.js'
+import { io } from '../server.js'
 let fakeChords = []
 const createFakeData = () => {
   fakeChords = []
@@ -42,7 +42,6 @@ const sendFakeDataInterval = () => {
 }
 
 const fakeData = () => {
-  console.log('yes?')
   createFakeData()
 }
 
